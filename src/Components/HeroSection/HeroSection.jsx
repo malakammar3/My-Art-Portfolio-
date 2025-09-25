@@ -8,7 +8,7 @@ const fadeInUp = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-const HeroSection = () => {
+const HeroSection = ({ language }) => {
   const scrollToGallery = () => {
     const gallerySection = document.getElementById("gallery");
     if (gallerySection) {
@@ -29,6 +29,7 @@ const HeroSection = () => {
         px: 2,
       }}
     >
+      
       {/* Title */}
       <Typography
         variant="h2"
@@ -40,7 +41,7 @@ const HeroSection = () => {
           animation: `${fadeInUp} 1s ease-out`,
         }}
       >
-        Welcome to Malora's Art
+        {language === "en" ? "Welcome to Malora's Arte" : "مرحبًا بك في معرض مالورا الفني"}
       </Typography>
 
       {/* Subtitle */}
@@ -53,7 +54,9 @@ const HeroSection = () => {
           animation: `${fadeInUp} 1.5s ease-out`,
         }}
       >
-        Explore my collection of artworks and creative inspiration.
+        {language === "en"
+          ? "Explore my collection of artworks and creative inspiration."
+          : "استكشف مجموعتي من الأعمال الفنية والإلهام الإبداعي."}
       </Typography>
 
       {/* Button */}
@@ -73,7 +76,7 @@ const HeroSection = () => {
             animation: `${fadeInUp} 2s ease-out`,
         }}
         >
-        View Gallery
+        {language === "en" ? "View Gallery" : "عرض المعرض"}
     </Button>
 
     </Box>

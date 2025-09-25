@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Box, Fab, Zoom, IconButton } from "@mui/material";
 import GalleryCard from "../GalleryCard/GalleryCard.jsx";
-import ArtworkModal from "../ArtworkModal/ArtworkModal.jsx";
 import Masonry from "@mui/lab/Masonry";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -17,18 +16,51 @@ import art6 from "../../imgs/art6.jpg";
 import art7 from "../../imgs/art7.jpg";
 import art8 from "../../imgs/art8.jpg";
 
-const artworks = [
-  { title: "Artwork 1", image: art1, description: "This is Artwork 1 description." },
-  { title: "Artwork 2", image: art2, description: "This is Artwork 2 description." },
-  { title: "Artwork 3", image: art3, description: "This is Artwork 3 description." },
-  { title: "Artwork 4", image: art4, description: "This is Artwork 4 description." },
-  { title: "Artwork 5", image: art5, description: "This is Artwork 5 description." },
-  { title: "Artwork 6", image: art6, description: "This is Artwork 6 description." },
-  { title: "Artwork 7", image: art7, description: "This is Artwork 7 description." },
-  { title: "Artwork 8", image: art8, description: "This is Artwork 8 description." },
-];
 
-const GalleryPage = () => {
+const artworks = [
+  {
+    title: { en: "Artwork 1", ar: "اللوحة 1" },
+    image: art1,
+    description: { en: "This is Artwork 1 description.", ar: "هذا وصف اللوحة 1" },
+  },
+  {
+    title: { en: "Artwork 2", ar: "اللوحة 2" },
+    image: art2,
+    description: { en: "This is Artwork 2 description.", ar: "هذا وصف اللوحة 2" },
+  },
+  {
+    title: { en: "Artwork 3", ar: "اللوحة 3" },
+    image: art3,
+    description: { en: "This is Artwork 3 description.", ar: "هذا وصف اللوحة 3" },
+  },
+  {
+    title: { en: "Artwork 4", ar: "اللوحة 4" },
+    image: art4,
+    description: { en: "This is Artwork 4 description.", ar: "هذا وصف اللوحة 4" },
+  },
+  {
+    title: { en: "Artwork 5", ar: "اللوحة 5" },
+    image: art5,
+    description: { en: "This is Artwork 5 description.", ar: "هذا وصف اللوحة 5" },
+  },
+  {
+    title: { en: "Artwork 6", ar: "اللوحة 6" },
+    image: art6,
+    description: { en: "This is Artwork 6 description.", ar: "هذا وصف اللوحة 6" },
+  },
+  {
+    title: { en: "Artwork 7", ar: "اللوحة 7" },
+    image: art7,
+    description: { en: "This is Artwork 7 description.", ar: "هذا وصف اللوحة 7" },
+  },
+  {
+    title: { en: "Artwork 8", ar: "اللوحة 8" },
+    image: art8,
+    description: { en: "This is Artwork 8 description.", ar: "هذا وصف اللوحة 8" },
+  },];
+
+const GalleryPage = ({ language }) => {
+
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [showScroll, setShowScroll] = useState(false);
 
@@ -53,17 +85,23 @@ const GalleryPage = () => {
             variant="h3"
             sx={{ fontWeight: "bold", color: "#F28D8D", fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" } }}
           >
-            🎨 My Art Gallery
+            {language === "en" ? "🎨 My Art Gallery" : "🎨 معرض أعمالي الفنية"}
           </Typography>
           <Typography variant="body1" sx={{ color: "#2F2F2F", mt: 2 }}>
-            A collection of my favorite artworks, showcasing my style and inspiration.
+            {language === "en"
+              ? "A collection of my favorite artworks, showcasing my style and inspiration."
+              : "مجموعة من أعمالي الفنية المفضلة، تعرض أسلوبي وإلهامي."}
           </Typography>
         </Box>
 
         <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2} sx={{ alignItems: "flex-start" }}>
           {artworks.map((art, index) => (
             <Box key={index} onClick={() => handleOpen(index)} sx={{ cursor: "pointer", breakInside: "avoid" }}>
-              <GalleryCard title={art.title} image={art.image} />
+              <GalleryCard
+                title={art.title[language]}  // <-- dynamic title
+                image={art.image}
+      
+              />
             </Box>
           ))}
         </Masonry>
@@ -119,22 +157,25 @@ const GalleryPage = () => {
             }}
           >
             <img
-              src={artworks[selectedIndex].image}
-              alt={artworks[selectedIndex].title}
-              style={{
-                width: "100%",
-                maxHeight: "70vh",
-                objectFit: "contain",
-                borderRadius: 12,
-                boxShadow: "0 8px 30px rgba(0,0,0,0.6)",
-              }}
-            />
-            <Typography variant="h5" sx={{ mt: 2, color: "#F28D8D", fontWeight: "bold" }}>
-              {artworks[selectedIndex].title}
-            </Typography>
-            <Typography variant="body1" sx={{ mt: 1, color: "#fff" }}>
-              {artworks[selectedIndex].description}
-            </Typography>
+                src={artworks[selectedIndex].image}
+                alt={artworks[selectedIndex].title[language]} // <-- use the selected language
+                style={{
+                    width: "100%",
+                    maxHeight: "70vh",
+                    objectFit: "contain",
+                    borderRadius: 12,
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.6)",
+                }}
+                />
+
+                <Typography variant="h5" sx={{ mt: 2, color: "#F28D8D", fontWeight: "bold" }}>
+                {artworks[selectedIndex].title[language]} 
+                </Typography>
+
+                <Typography variant="body1" sx={{ mt: 1, color: "#fff" }}>
+                {artworks[selectedIndex].description[language]} 
+                </Typography>
+
           </Box>
         </Box>
       )}

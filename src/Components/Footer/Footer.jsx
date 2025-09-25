@@ -6,7 +6,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
-const Footer = () => {
+const Footer = ({ language }) => {
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("ammarmalak243@gmail.com");
     alert("Email copied to clipboard!");
@@ -43,7 +43,8 @@ const Footer = () => {
           fontSize: { xs: "1.2rem", sm: "1.5rem" },
         }}
       >
-        Contact Info
+        {language === "en" ? "Contact Info" : "معلومات التواصل"}
+        
       </Typography>
 
       {/* Social icons */}
@@ -93,7 +94,8 @@ const Footer = () => {
       </Box>
 
       <Typography variant="body2" sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }}>
-        © {new Date().getFullYear()} Malora's Art. All rights reserved.
+        © {new Date().getFullYear()} 
+        {language === "en" ? "Malora's Arte. All rights reserved." : " كل الحقوق محفوظة لدى معرض مالورا الفني"}
       </Typography>
     </Box>
   );

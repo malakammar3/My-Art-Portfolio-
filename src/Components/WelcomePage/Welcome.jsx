@@ -1,18 +1,13 @@
-////////////////////////////////////////Welcome Page////////////////////////////////////////
-
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, Link } from "@mui/material";
 import { keyframes } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
 
-// invisible and shifted down 20px to full visible and back to its original position
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); } 
 `;
 
-const WelcomePage = ({onContinue}) => {
-  const navigate = useNavigate(); // React Router navigation
+const WelcomePage = ({ onContinue, language, onChangeLanguage }) => {
 
   return (
     <Box
@@ -22,61 +17,67 @@ const WelcomePage = ({onContinue}) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        bgcolor: "#FAF3E0", // background
+        bgcolor: "#FAF3E0",
         textAlign: "center",
-        px: 2, // padding for very small screens
+        px: 2,
       }}
     >
       <Typography
         variant="h2"
         sx={{
-          color: "#F28D8D", // soft pink
+          color: "#F28D8D",
           fontWeight: "bold",
           mb: 4,
           animation: `${fadeIn} 2s ease-out`,
-          // responsive font sizes
           fontSize: {
-            xs: "1.6rem", // extra small (mobile 320px)
-            sm: "2rem",   // small (tablet portrait)
-            md: "3rem",   // medium (tablet landscape / small laptop)
-            lg: "3.5rem", // large
+            xs: "1.6rem",
+            sm: "2rem",
+            md: "3rem",
+            lg: "3.5rem",
           },
         }}
       >
-        Welcome to Malora&apos;s Art Portfolio
+        {language === "en" ? "Welcome to Malora's Arte Portfolio" : "مرحبًا بك في معرض مالورا الفني"}
       </Typography>
+
 
       <Button
         variant="contained"
-        onClick={onContinue} // navigate to Gallery page
+        onClick={onContinue}
         sx={{
-          bgcolor: "#88C9BF", // mint green
-          color: "#2F2F2F",
-          fontWeight: "bold",
-          borderRadius: "12px",
-          animation: `${fadeIn} 3s ease-out`,
-          "&:hover": { bgcolor: "#6faea6" },
-
-          // responsive padding & font size
-          px: {
-            xs: 2,
-            sm: 3,
-            md: 4,
-          },
-          py: {
-            xs: 1,
-            sm: 1.2,
-            md: 1.5,
-          },
-          fontSize: {
-            xs: "0.8rem",
-            sm: "0.9rem",
-            md: "1rem",
-          },
+            bgcolor: "#88C9BF",
+            color: "#2F2F2F",
+            fontWeight: "bold",
+            borderRadius: "12px",
+            animation: `${fadeIn} 3s ease-out`,
+            "&:hover": { bgcolor: "#6faea6" },
+            px: { xs: 2, sm: 3, md: 4 },
+            py: { xs: 1, sm: 1.2, md: 2 },
+            my: {xs: 1, sm: 1.2, md: 6},
+            fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem" },
         }}
       >
-        Continue
+        {language === "en" ? "Continue" : "متابعة"}
       </Button>
+        
+        <Link
+        component="button"
+        sx={{
+            mb: 3,
+            color: "#F28D8D",
+            fontWeight: "bold",
+            textDecoration: "underline",
+            animation: `${fadeIn} 2.5s ease-out`,
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+        }}
+        onClick={() => onChangeLanguage(language === "en" ? "ar" : "en")}
+        >
+        {language === "en"
+            ? "إذا أردت النسخة العربية من الموقع اضغط هنا"
+            : "Click here for English version"}
+        </Link>
+
+
     </Box>
   );
 };

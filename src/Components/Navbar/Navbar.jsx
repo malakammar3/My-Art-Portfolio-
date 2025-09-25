@@ -15,17 +15,23 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { HashLink } from "react-router-hash-link";
 
-const Navbar = () => {
+const Navbar = ({ language }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   // Navbar items
-    const navItems = [
-      { label: "Home", link: "/#welcome" },
-      { label: "Gallery", link: "/#gallery" },
-      { label: "Contact", link: "/#contact" },
-    ];
+    const navItems = language === "en"
+    ? [
+        { label: "Home", link: "/#welcome" },
+        { label: "Gallery", link: "/#gallery" },
+        { label: "Contact", link: "/#contact" },
+      ]
+    : [
+        { label: "الرئيسية", link: "/#welcome" },
+        { label: "المعرض", link: "/#gallery" },
+        { label: "اتصل بنا", link: "/#contact" },
+      ];
 
   // Drawer content for mobile
   const drawer = (
@@ -34,7 +40,7 @@ const Navbar = () => {
       onClick={handleDrawerToggle}
     >
       <Typography variant="h6" sx={{ my: 2, fontWeight: "bold" }}>
-        Malora's Art
+        Malora's Arte
       </Typography>
       <List>
         {navItems.map((item, index) => (
