@@ -15,6 +15,7 @@ import art5 from "../../imgs/art5.jpg";
 import art6 from "../../imgs/art6.jpg";
 import art7 from "../../imgs/art7.jpg";
 import art8 from "../../imgs/art8.jpg";
+import art9 from "../../imgs/art9.jpg";
 
 
 const artworks = [
@@ -57,6 +58,11 @@ const artworks = [
     title: { en: "Artwork 8", ar: "اللوحة 8" },
     image: art8,
     description: { en: "This is Artwork 8 description.", ar: "هذا وصف اللوحة 8" },
+  },
+  {
+    title: { en: "Artwork 9", ar: "اللوحة 9" },
+    image: art9,
+    description: { en: "This is Artwork 9 description.", ar: "هذا وصف اللوحة 9" },
   },];
 
 const GalleryPage = ({ language }) => {
