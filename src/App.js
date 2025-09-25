@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from "react";
+import { HashRouter as Router } from "react-router-dom";
+import Navbar from "./Components/Navbar/Navbar.jsx";
+import WelcomePage from "./Components/WelcomePage/Welcome.jsx";
+import HeroSection from "./Components/HeroSection/HeroSection.jsx";
+import GalleryPage from "./Components/GalleryPage/GalleryPage.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 function App() {
+  const [showMain, setShowMain] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {!showMain ? (
+        <WelcomePage onContinue={() => setShowMain(true)} />
+      ) : (
+        <>
+          <Navbar />
+          <HeroSection />
+          <GalleryPage />
+          <Footer />
+        </>
+      )}
+    </Router>
   );
 }
 
